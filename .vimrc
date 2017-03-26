@@ -4,70 +4,91 @@
 "                        \ V /| | | | | | | | | (__
 "                       (_)_/ |_|_| |_| |_|_|  \___|
 "
-" Author: chxuan <787280310@qq.com>
-" Source: https://github.com/chxuan/vimplus
 
-" genernal settings
-syntax enable
+" General Settings
+" -------------------------------------------------
+syntax enable			" Syntax Highlight
 syntax on
-set t_Co=256
-set cul 
+
+set t_Co=256			" Color depth
+set cul 			" Cursor Highlight
+set number			" Show line number on the side
+set ruler 			" Show current line/col number and relative position at the bottom
+
+set linespace=0			" Spacing between lines (only works for gVim)
+set confirm			" if quit & save fail confirmation pop
+set showmatch			" Show parens (maybe)
+set report=0			" Always show the number of line yanke/deleted
+
+set noeb			" Disable beeping
+set cmdheight=1
+set showcmd         		" Show commands typed
+set scrolloff=3     		" Show 3 lines after the cursor when scrolling
+set laststatus=2		" Always show the status line
+
+set noswapfile			" Backup files		
+set nobackup
+set autoread			" Re-load files that have been modified
+set autowrite			" Auto save when window lose focus
+
+set matchtime=1
+set magic  
+
+" Helpful shortcuts
+" -------------------------------------------------
+set backspace=2			" Backspace works as it should
+set mouse=a			" Enable Mouse for all modes
+
+
+" Misc
+" -------------------------------------------------
 set shortmess=atI   
-autocmd InsertEnter * se cul    
-set ruler           
-set showcmd         
-set scrolloff=3     
-set laststatus=2
+set history=1000		" Command history
+set ignorecase			" Search ignore case 
+set hlsearch			" Highlight search
+set incsearch			" Search the text as the pattern is written  
+autocmd InsertEnter * se cul  
+
+" Indentation
+" -------------------------------------------------
 set autoindent
 set smartindent
 set cindent
 set cinoptions=g0,:0,N-s,(0
-set tabstop=4
+set tabstop=4			" Tab size in number of spaces
 set softtabstop=4
 set shiftwidth=4
-set expandtab
+set expandtab			" insert spaces instead of tabs
 set smarttab
-set number
-set history=1000
-set hlsearch
-set incsearch
-set langmenu=zh_CN.UTF-8
-set helplang=cn
-set cmdheight=2
-set autoread
-set completeopt=preview,menu 
-set autowrite
-set magic                   
+
+set wildmenu			" Auto-completion context menu
+ 
+set completeopt=preview,menu    
 set guioptions-=T           
 set guioptions-=m           
-set nocompatible
-set noeb
-set confirm
-set nobackup
-set noswapfile
-set ignorecase
-set linespace=0
-set wildmenu
-set backspace=2
 set whichwrap+=<,>,h,l
-set mouse=a
 set selection=exclusive
 set selectmode=mouse,key
-set report=0
 set fillchars=vert:\ ,stl:\ ,stlnc:\
-set showmatch
-set matchtime=1
-set scrolloff=3
 set completeopt=longest,menu
 set iskeyword+=.
+
+" Language and encoding
+" -------------------------------------------------
+
+set langmenu=en_US.UTF-8
+set helplang=en
 set termencoding=utf-8
 set encoding=utf8
-set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
-filetype on
+set fileencodings=utf8
+
+filetype on		" detect the type of file to load highlight and stuff
 filetype plugin on
 filetype indent on
 
-" create file settings
+" Default file
+" -------------------------------------------------
+
 autocmd BufNewFile *.cpp,*.cc,*.c,*.hpp,*.h,*.sh,*.py exec ":call SetTitle()" 
 func SetTitle() 
 	if expand("%:e") == 'sh'
@@ -77,15 +98,6 @@ func SetTitle()
         call setline(1,"#!/usr/bin/env python")
         call append(line("."),"# coding=utf-8")
 	    call append(line(".")+1, "") 
-    elseif expand("%:e") == 'cpp'
-		call setline(1,"#include <iostream>") 
-		call append(line("."), "") 
-    elseif expand("%:e") == 'cc'
-		call setline(1,"#include <iostream>") 
-		call append(line("."), "") 
-    elseif expand("%:e") == 'c'
-		call setline(1,"#include <stdio.h>") 
-		call append(line("."), "") 
     elseif expand("%:e") == 'h'
 		call setline(1, "#pragma once")
     elseif expand("%:e") == 'hpp'
@@ -95,116 +107,131 @@ endfunc
 autocmd BufNewFile * normal G
 
 " Vundle
-set nocompatible              
-filetype off        
+" -------------------------------------------------
+
+set nocompatible		" Allow Arrow keys              
+filetype off        		" Vundle stuff
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'L9'
-Plugin 'chxuan/change-colorscheme'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/nerdtree'
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-Plugin 'Valloric/MatchTagAlways'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'docunext/closetag.vim'
-Plugin 'godlygeek/tabular'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-endwise'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'majutsushi/tagbar'
-Plugin 'octol/vim-cpp-enhanced-highlight'
+" Airline - Pretty Arrow (Very useful)
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+
+Plugin 'L9'
+
+Plugin 'chxuan/change-colorscheme'
+
+" Multiline commenter/uncomment 
+Plugin 'scrooloose/nerdcommenter'
+
+" File system window
+Plugin 'scrooloose/nerdtree'
+
+" Auto completion
+Plugin 'Valloric/YouCompleteMe'
+
+" Auto pairs bracket
+" Plugin 'jiangmiao/auto-pairs'
+
+" HTML stuff 
+" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+
+" Highlight closing tags
+Plugin 'Valloric/MatchTagAlways'
+
+" insert close tag
+Plugin 'docunext/closetag.vim'
+
+" Indent multi line 
+Plugin 'godlygeek/tabular'
+
+" Git wrapper
+Plugin 'tpope/vim-fugitive'
+
+" Enable to modify surrounding bracket/quote
+Plugin 'tpope/vim-surround'
+
+" Multiline comments what about nerdcommenter
+Plugin 'tpope/vim-commentary'
+
+" Better repeat command
+Plugin 'tpope/vim-repeat'
+
+" Helper to end tags for some languages
+Plugin 'tpope/vim-endwise'
+
+"Plugin 'ctrlpvim/ctrlp.vim'
+
+" Class browser 
+Plugin 'majutsushi/tagbar'
+
+" exactly what it says
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
+" switch between header and source files
 Plugin 'vim-scripts/a.vim'
-Plugin 'vim-scripts/DoxygenToolkit.vim'
-Plugin 'vim-scripts/SQLComplete.vim'
+
+"Plugin 'vim-scripts/DoxygenToolkit.vim'
+"Plugin 'vim-scripts/SQLComplete.vim'
+
+" Txt file highlighting
 Plugin 'vim-scripts/txt.vim'
+
+" Pretty icons
 Plugin 'ryanoasis/vim-devicons'
+
+" Show HEX color in text
 Plugin 'gorodinskiy/vim-coloresque'
-Plugin 'will133/vim-dirdiff'
+
+" Directory diff 
+" Plugin 'will133/vim-dirdiff'
+
+" Incremental Search
 Plugin 'haya14busa/incsearch.vim'
+
+" Useless starting window
 Plugin 'mhinz/vim-startify'
 
 call vundle#end()            
 filetype plugin indent on    
 
-" load vim default plugin
-runtime macros/matchit.vim
 
-" change-colorscheme
-map <F10> :NextColorScheme<CR>
-imap <F10> <ESC> :NextColorScheme<CR>
-map <F9> :PreviousColorScheme<CR>
-imap <F9> <ESC> :PreviousColorScheme<CR>
 
-" nerdtree
+" Colorscheme
+" -------------------------------------------------
+set background=dark
+let g:solarized_termcolors=256
+colorscheme solarized		"colorscheme monokai
+
+" cpp_class_scope_highlight
+" -------------------------------------------------
+let g:cpp_class_scope_highlight = 1
+let g:cpp_experimental_template_highlight = 1
+let c_no_curly_error = 1
+
+
+" Project Tree (nerdtree)
+" -------------------------------------------------
 map <F3> :NERDTreeToggle<CR>
 imap <F3> <ESC> :NERDTreeToggle<CR>
-"autocmd vimenter * if !argc() | NERDTree | endif
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" Doxygen
-let g:DoxygenToolkit_authorName="chxuan, 787280310@qq.com"
-let s:licenseTag = "Copyright(C)\<enter>"
-let s:licenseTag = s:licenseTag . "For free\<enter>"
-let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
-let g:DoxygenToolkit_licenseTag = s:licenseTag
-let g:DoxygenToolkit_briefTag_funcName="yes"
-let g:doxygen_enhanced_color=1
-let g:DoxygenToolkit_commentType="Qt"
+autocmd vimenter * if !argc() | NERDTree | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
-" YCM
-let g:ycm_confirm_extra_conf = 0 
-let g:ycm_error_symbol = '>>'
-let g:ycm_warning_symbol = '>*'
-let g:ycm_seed_identifiers_with_syntax = 1 
-let g:ycm_complete_in_comments = 1 
-let g:ycm_complete_in_strings = 1 
-"let g:ycm_cache_omnifunc = 0 
-let mapleader = ","
-nnoremap <leader>u :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>i :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>o :YcmCompleter GoToInclude<CR>
-nmap <F5> :YcmDiags<CR>
 
-" ctags
-set tags+=/usr/include/tags
-set tags+=~/.vim/systags
-set tags+=~/.vim/x86_64-linux-gnu-systags
-let g:ycm_collect_identifiers_from_tags_files = 1
-let g:ycm_semantic_triggers = {} 
-let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&',']']
-
-" a.vim: .h -> .cpp or .cpp -> .h
-nnoremap <silent> <F2> :A<CR>
-
-" tagbar
+" Class Tree (tagbar)
+" -------------------------------------------------
 let g:tagbar_ctags_bin = '/usr/bin/ctags'
 let g:tagbar_width = 30
 map <F4> :TagbarToggle<CR>
 imap <F4> <ESC> :TagbarToggle<CR>
 
-" colorscheme
-set background=dark
-let g:solarized_termcolors=256
-colorscheme solarized
-"colorscheme monokai
 
-" cpp_class_scope_highlight
-let g:cpp_class_scope_highlight = 1
-let g:cpp_experimental_template_highlight = 1
-let c_no_curly_error = 1
-
-" airline
-let g:airline_theme="luna"
-" let g:airline_theme="badwolf"
+" Status Bar (airline)
+" -------------------------------------------------
+let g:airline_theme="luna"				" let g:airline_theme="badwolf"
 let g:airline_powerline_fonts = 1
 "let g:airline_section_b = '%{strftime("%c")}'
 "let g:airline_section_y = 'BN: %{bufnr("%")}'
@@ -218,19 +245,72 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
-nnoremap <C-N> :bn<CR>
-nnoremap <C-P> :bp<CR>
-
-" ctrlp
-let g:ctrlp_map = '<c-f>'
-let g:ctrlp_cmd = ':CtrlP'
-let g:ctrlp_working_path_mode = '0'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
 
 " vim-devicons
 set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
 
+" Doxygen
+" -------------------------------------------------
+let g:DoxygenToolkit_authorName="Delaunay, Pierre.delaunay@hec.ca"
+let s:licenseTag = "Copyright(C)\<enter>"
+let s:licenseTag = s:licenseTag . "For free\<enter>"
+let s:licenseTag = s:licenseTag . "All right reserved\<enter>"
+let g:DoxygenToolkit_licenseTag = s:licenseTag
+let g:DoxygenToolkit_briefTag_funcName="yes"
+let g:doxygen_enhanced_color=1
+let g:DoxygenToolkit_commentType="Qt"
+
+
+" Auto complete (YouCompleteMe)
+" -------------------------------------------------
+let g:ycm_confirm_extra_conf = 0 
+let g:ycm_error_symbol = '>>'
+let g:ycm_warning_symbol = '>*'
+let g:ycm_seed_identifiers_with_syntax = 1 
+let g:ycm_complete_in_comments = 1 
+let g:ycm_complete_in_strings = 1 
+"let g:ycm_cache_omnifunc = 0 
+let mapleader = ","
+nnoremap <leader>u :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>i :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>o :YcmCompleter GoToInclude<CR>
+nmap <F5> :YcmDiags<CR>
+
+
+" ctags
+" ``````````````
+set tags+=/usr/include/tags
+set tags+=~/.vim/systags
+set tags+=~/.vim/x86_64-linux-gnu-systags
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_semantic_triggers = {} 
+let g:ycm_semantic_triggers.c = ['->', '.', ' ', '(', '[', '&',']']
+
+" a.vim: .h -> .cpp or .cpp -> .h
+nnoremap <silent> <F2> :A<CR>
+
+
+
+
+" load vim default plugin
+"runtime macros/matchit.vim
+
+" change-colorscheme
+"map <F10> :NextColorScheme<CR>
+"imap <F10> <ESC> :NextColorScheme<CR>
+"map <F9> :PreviousColorScheme<CR>
+"imap <F9> <ESC> :PreviousColorScheme<CR>
+
+" ctrlp
+"let g:ctrlp_map = '<c-f>'
+"let g:ctrlp_cmd = ':CtrlP'
+"let g:ctrlp_working_path_mode = '0'
+"set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+
 " incsearch.vim
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
+"map /  <Plug>(incsearch-forward)
+"map ?  <Plug>(incsearch-backward)
+"map g/ <Plug>(incsearch-stay)
+
+"nnoremap <C-N> :bn<CR>
+"nnoremap <C-P> :bp<CR>
