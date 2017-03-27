@@ -39,6 +39,46 @@ set magic
 set backspace=2			" Backspace works as it should
 set mouse=a			" Enable Mouse for all modes
 
+" ctrl-c: copy
+vmap <C-c> "+yi
+
+" ctrl-x: cut
+vmap <C-x> "+c
+
+" ctrl-v: paste
+vmap <C-v> c<ESC>"+p
+imap <C-v> <C-r><C-o>+
+
+" ctrl-s: Save
+vmap <C-s> <ESC>:update<CR>gv
+imap <C-s> <c-o>:update<CR>
+nmap <C-s> :update<CR>
+
+" ctrl-S: Save ALL/Save and quit/Save and remove trailling white space
+
+" ctrl-z: undo
+" vmap <C-z> u<CR>
+
+" ctrl-y : redo
+" vmap <C-y> <C-R><CR>
+
+" ctrl-f: find
+" vmap <C-f> *
+
+" ctrl-=: find and replace
+" vmap <C-=> s
+
+
+" ctrl-a: select a line
+" vmap <C-a> 
+
+" ctrl-A: select the whole document
+" vmap <C-A> ggVG
+
+vmap <Tab> >><CR>
+vmap <S-Tab> <<<CR>
+
+
 
 " Misc
 " -------------------------------------------------
