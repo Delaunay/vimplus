@@ -8,29 +8,29 @@
 
 " General Settings
 " -------------------------------------------------
-syntax enable		" Syntax Highlight
+syntax enable    " Syntax Highlight
 syntax on
 
-set t_Co=256		" Color depth
-set cul 			" Cursor Highlight
-set number			" Show line number on the side
-set ruler 			" Show current line/col number and relative position at the bottom
+set t_Co=256    " Color depth
+set cul         " Cursor Highlight
+set number        " Show line number on the side
+set ruler         " Show current line/col number and relative position at the bottom
 
-set linespace=0		" Spacing between lines (only works for gVim)
-set confirm		    " if quit & save fail confirmation pop
-set showmatch		" Show parens (maybe)
-set report=0		" Always show the number of line yanke/deleted
+set linespace=0    " Spacing between lines (only works for gVim)
+set confirm        " if quit & save fail confirmation pop
+set showmatch    " Show parens (maybe)
+set report=0    " Always show the number of line yanke/deleted
 
-set noeb			" Disable beeping
+set noeb        " Disable beeping
 set cmdheight=1
 set showcmd         " Show commands typed
 set scrolloff=3     " Show 3 lines after the cursor when scrolling
-set laststatus=2	" Always show the status line
+set laststatus=2    " Always show the status line
 
-set noswapfile		" Backup files		
+set noswapfile    " Backup files    
 set nobackup
-set autoread		" Re-load files that have been modified
-set autowrite		" Auto save when window lose focus
+set autoread    " Re-load files that have been modified
+set autowrite    " Auto save when window lose focus
 
 set matchtime=1
 set magic  
@@ -45,8 +45,8 @@ set guioptions-=m
 
 " Helpful shortcuts
 " -------------------------------------------------
-set backspace=2		" Backspace works as it should
-set mouse=a			" Enable Mouse for all modes
+set backspace=2    " Backspace works as it should
+set mouse=a        " Enable Mouse for all modes
 
 " ctrl-c: copy
 vmap <C-c> "+yi
@@ -93,10 +93,10 @@ command Q :q
 " Misc
 " -------------------------------------------------
 set shortmess=atI   
-set history=1000		" Command history
-set ignorecase			" Search ignore case 
-set hlsearch			" Highlight search
-set incsearch			" Search the text as the pattern is written  
+set history=1000    " Command history
+set ignorecase        " Search ignore case 
+set hlsearch        " Highlight search
+set incsearch        " Search the text as the pattern is written  
 autocmd InsertEnter * se cul  
 
 " Indentation
@@ -105,13 +105,13 @@ set autoindent
 set smartindent
 set cindent
 set cinoptions=g0,:0,N-s,(0
-set tabstop=4			" Tab size in number of spaces
+set tabstop=4        " Tab size in number of spaces
 set softtabstop=4
 set shiftwidth=4
-set expandtab			" insert spaces instead of tabs
+set expandtab        " insert spaces instead of tabs
 set smarttab
 
-set wildmenu			" Auto-completion context menu
+set wildmenu        " Auto-completion context menu
  
 set completeopt=preview,menu    
 set whichwrap+=<,>,h,l
@@ -130,7 +130,7 @@ set termencoding=utf-8
 set encoding=utf8
 set fileencodings=utf8
 
-filetype on		" detect the type of file to load highlight and stuff
+filetype on    " detect the type of file to load highlight and stuff
 filetype plugin on
 filetype indent on
 
@@ -139,26 +139,26 @@ filetype indent on
 
 autocmd BufNewFile *.cpp,*.cc,*.c,*.hpp,*.h,*.sh,*.py exec ":call SetTitle()" 
 func SetTitle() 
-	if expand("%:e") == 'sh'
-		call setline(1,"\#!/bin/bash") 
-		call append(line("."), "") 
+    if expand("%:e") == 'sh'
+    call setline(1,"\#!/bin/bash") 
+    call append(line("."), "") 
     elseif expand("%:e") == 'py'
         call setline(1,"#!/usr/bin/env python")
         call append(line("."),"# coding=utf-8")
-	    call append(line(".")+1, "") 
+        call append(line(".")+1, "") 
     elseif expand("%:e") == 'h'
-		call setline(1, "#pragma once")
+    call setline(1, "#pragma once")
     elseif expand("%:e") == 'hpp'
-		call setline(1, "#pragma once")
-	endif
+    call setline(1, "#pragma once")
+    endif
 endfunc 
 autocmd BufNewFile * normal G
 
 " Vundle
 " -------------------------------------------------
 
-set nocompatible		    " Allow Arrow keys              
-filetype off        		" Vundle stuff
+set nocompatible        " Allow Arrow keys              
+filetype off            " Vundle stuff
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -250,7 +250,7 @@ filetype plugin indent on
 " -------------------------------------------------
 set background=dark
 let g:solarized_termcolors=256
-colorscheme solarized		"colorscheme monokai
+colorscheme solarized    "colorscheme monokai
 
 " cpp_class_scope_highlight
 " -------------------------------------------------
@@ -278,7 +278,7 @@ imap <F4> <ESC> :TagbarToggle<CR>
 
 " Status Bar (airline)
 " -------------------------------------------------
-let g:airline_theme="luna"				" let g:airline_theme="badwolf"
+let g:airline_theme="luna"        " let g:airline_theme="badwolf"
 let g:airline_powerline_fonts = 1
 "let g:airline_section_b = '%{strftime("%c")}'
 "let g:airline_section_y = 'BN: %{bufnr("%")}'
