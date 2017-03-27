@@ -1,3 +1,4 @@
+
 "
 "                       __   _(_)_ __ ___  _ __ ___
 "                       \ \ / / | '_ ` _ \| '__/ __|
@@ -7,36 +8,44 @@
 
 " General Settings
 " -------------------------------------------------
-syntax enable			" Syntax Highlight
+syntax enable		" Syntax Highlight
 syntax on
 
-set t_Co=256			" Color depth
+set t_Co=256		" Color depth
 set cul 			" Cursor Highlight
 set number			" Show line number on the side
 set ruler 			" Show current line/col number and relative position at the bottom
 
-set linespace=0			" Spacing between lines (only works for gVim)
-set confirm			" if quit & save fail confirmation pop
-set showmatch			" Show parens (maybe)
-set report=0			" Always show the number of line yanke/deleted
+set linespace=0		" Spacing between lines (only works for gVim)
+set confirm		    " if quit & save fail confirmation pop
+set showmatch		" Show parens (maybe)
+set report=0		" Always show the number of line yanke/deleted
 
 set noeb			" Disable beeping
 set cmdheight=1
-set showcmd         		" Show commands typed
-set scrolloff=3     		" Show 3 lines after the cursor when scrolling
-set laststatus=2		" Always show the status line
+set showcmd         " Show commands typed
+set scrolloff=3     " Show 3 lines after the cursor when scrolling
+set laststatus=2	" Always show the status line
 
-set noswapfile			" Backup files		
+set noswapfile		" Backup files		
 set nobackup
-set autoread			" Re-load files that have been modified
-set autowrite			" Auto save when window lose focus
+set autoread		" Re-load files that have been modified
+set autowrite		" Auto save when window lose focus
 
 set matchtime=1
 set magic  
 
+
+" GUI options
+" -------------------------------------------------
+set guifont=Monospace\ 10 " pick a patched font
+set guioptions-=T           
+set guioptions-=m   
+
+
 " Helpful shortcuts
 " -------------------------------------------------
-set backspace=2			" Backspace works as it should
+set backspace=2		" Backspace works as it should
 set mouse=a			" Enable Mouse for all modes
 
 " ctrl-c: copy
@@ -54,13 +63,14 @@ vmap <C-s> <ESC>:update<CR>gv
 imap <C-s> <c-o>:update<CR>
 nmap <C-s> :update<CR>
 
+
 " ctrl-S: Save ALL/Save and quit/Save and remove trailling white space
 
 " ctrl-z: undo
-" vmap <C-z> u<CR>
+nmap <C-z> :u<CR> 
 
 " ctrl-y : redo
-" vmap <C-y> <C-R><CR>
+vmap <C-y> <C-R><CR>
 
 " ctrl-f: find
 " vmap <C-f> *
@@ -73,11 +83,11 @@ nmap <C-s> :update<CR>
 " vmap <C-a> 
 
 " ctrl-A: select the whole document
-" vmap <C-A> ggVG
+" vmap <C-a> ggVG
 
 vmap <Tab> >><CR>
 vmap <S-Tab> <<<CR>
-
+command Q :q
 
 
 " Misc
@@ -104,8 +114,6 @@ set smarttab
 set wildmenu			" Auto-completion context menu
  
 set completeopt=preview,menu    
-set guioptions-=T           
-set guioptions-=m           
 set whichwrap+=<,>,h,l
 set selection=exclusive
 set selectmode=mouse,key
@@ -149,7 +157,7 @@ autocmd BufNewFile * normal G
 " Vundle
 " -------------------------------------------------
 
-set nocompatible		" Allow Arrow keys              
+set nocompatible		    " Allow Arrow keys              
 filetype off        		" Vundle stuff
 
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -202,7 +210,7 @@ Plugin 'tpope/vim-repeat'
 " Helper to end tags for some languages
 Plugin 'tpope/vim-endwise'
 
-"Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
 
 " Class browser 
 Plugin 'majutsushi/tagbar'
@@ -236,7 +244,6 @@ Plugin 'mhinz/vim-startify'
 
 call vundle#end()            
 filetype plugin indent on    
-
 
 
 " Colorscheme
@@ -285,9 +292,6 @@ let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
 let g:airline_right_sep = ''
 let g:airline_right_alt_sep = ''
-
-" vim-devicons
-set guifont=Droid\ Sans\ Mono\ for\ Powerline\ Nerd\ Font\ Complete\ 12
 
 " Doxygen
 " -------------------------------------------------
