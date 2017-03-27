@@ -8,29 +8,29 @@
 
 " General Settings
 " -------------------------------------------------
-syntax enable    " Syntax Highlight
+syntax enable       " Syntax Highlight
 syntax on
 
-set t_Co=256    " Color depth
-set cul         " Cursor Highlight
-set number        " Show line number on the side
-set ruler         " Show current line/col number and relative position at the bottom
+set t_Co=256        " Color depth
+set cul             " Cursor Highlight
+set number          " Show line number on the side
+set ruler           " Show current line/col number and relative position at the bottom
 
-set linespace=0    " Spacing between lines (only works for gVim)
-set confirm        " if quit & save fail confirmation pop
-set showmatch    " Show parens (maybe)
-set report=0    " Always show the number of line yanke/deleted
+set linespace=0     " Spacing between lines (only works for gVim)
+set confirm         " if quit & save fail confirmation pop
+set showmatch       " Show parens (maybe)
+set report=0        " Always show the number of line yanke/deleted
 
-set noeb        " Disable beeping
+set noeb            " Disable beeping
 set cmdheight=1
 set showcmd         " Show commands typed
 set scrolloff=3     " Show 3 lines after the cursor when scrolling
 set laststatus=2    " Always show the status line
 
-set noswapfile    " Backup files    
+set noswapfile      " Backup files    
 set nobackup
-set autoread    " Re-load files that have been modified
-set autowrite    " Auto save when window lose focus
+set autoread        " Re-load files that have been modified
+set autowrite       " Auto save when window lose focus
 
 set matchtime=1
 set magic  
@@ -45,8 +45,8 @@ set guioptions-=m
 
 " Helpful shortcuts
 " -------------------------------------------------
-set backspace=2    " Backspace works as it should
-set mouse=a        " Enable Mouse for all modes
+set backspace=2     " Backspace works as it should
+set mouse=a         " Enable Mouse for all modes
 
 " ctrl-c: copy
 vmap <C-c> "+yi
@@ -73,17 +73,16 @@ nmap <C-z> :u<CR>
 vmap <C-y> <C-R><CR>
 
 " ctrl-f: find
-" vmap <C-f> *
+" vmap <C-f> 
 
 " ctrl-=: find and replace
 " vmap <C-=> s
 
-
 " ctrl-a: select a line
-" vmap <C-a> 
+" vmap <C-A> V 
 
 " ctrl-A: select the whole document
-" vmap <C-a> ggVG
+vmap <C-a> ggVG
 
 vmap <Tab> >><CR>
 vmap <S-Tab> <<<CR>
@@ -93,26 +92,13 @@ command Q :q
 " Misc
 " -------------------------------------------------
 set shortmess=atI   
-set history=1000    " Command history
-set ignorecase        " Search ignore case 
-set hlsearch        " Highlight search
-set incsearch        " Search the text as the pattern is written  
+set history=1000        " Command history
+set ignorecase          " Search ignore case 
+set hlsearch            " Highlight search
+set incsearch           " Search the text as the pattern is written  
 autocmd InsertEnter * se cul  
 
-" Indentation
-" -------------------------------------------------
-set autoindent
-set smartindent
-set cindent
-set cinoptions=g0,:0,N-s,(0
-set tabstop=4        " Tab size in number of spaces
-set softtabstop=4
-set shiftwidth=4
-set expandtab        " insert spaces instead of tabs
-set smarttab
-
-set wildmenu        " Auto-completion context menu
- 
+set wildmenu            " Auto-completion context menu 
 set completeopt=preview,menu    
 set whichwrap+=<,>,h,l
 set selection=exclusive
@@ -120,6 +106,19 @@ set selectmode=mouse,key
 set fillchars=vert:\ ,stl:\ ,stlnc:\
 set completeopt=longest,menu
 set iskeyword+=.
+
+
+" Indentation
+" -------------------------------------------------
+set autoindent
+set smartindent
+set cindent
+set cinoptions=g0,:0,N-s,(0
+set tabstop=4           " Tab size in number of spaces
+set softtabstop=4
+set shiftwidth=4
+set expandtab           " insert spaces instead of tabs
+set smarttab
 
 " Language and encoding
 " -------------------------------------------------
@@ -136,7 +135,6 @@ filetype indent on
 
 " Default file
 " -------------------------------------------------
-
 autocmd BufNewFile *.cpp,*.cc,*.c,*.hpp,*.h,*.sh,*.py exec ":call SetTitle()" 
 func SetTitle() 
     if expand("%:e") == 'sh'
@@ -163,84 +161,38 @@ filetype off            " Vundle stuff
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'L9'
+Plugin 'chxuan/change-colorscheme'
+Plugin 'ctrlpvim/ctrlp.vim'
+"Plugin 'vim-scripts/DoxygenToolkit.vim'
+"Plugin 'vim-scripts/SQLComplete.vim'
+"Plugin 'will133/vim-dirdiff'                   " Directory diff
+"Plugin 'jiangmiao/auto-pairs'                  " Auto pairs bracket
+"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}     " HTML stuff 
+"
+Plugin 'octol/vim-cpp-enhanced-highlight'   " exactly what it says
+Plugin 'vim-scripts/a.vim'          " switch between header and source files
+Plugin 'Valloric/MatchTagAlways'    " Highlight closing tags
+Plugin 'docunext/closetag.vim'      " insert close tag
+Plugin 'godlygeek/tabular'          " Indent multi line 
+Plugin 'tpope/vim-fugitive'         " Git wrapper
+Plugin 'tpope/vim-surround'         " Enable to modify surrounding bracket/quote
+Plugin 'tpope/vim-commentary'       " Multiline comments what about nerdcommenter
+Plugin 'tpope/vim-repeat'           " Better repeat command
+Plugin 'tpope/vim-endwise'          " Helper to end tags for some languages
+Plugin 'majutsushi/tagbar'          " Class browser 
+Plugin 'vim-scripts/txt.vim'        " Txt file highlighting
+Plugin 'ryanoasis/vim-devicons'     " Pretty icons
+Plugin 'gorodinskiy/vim-coloresque' " Show HEX color in text
+Plugin 'haya14busa/incsearch.vim'   " Incremental Search
+Plugin 'mhinz/vim-startify'         " Useless starting window
+Plugin 'scrooloose/nerdcommenter'   " Multiline commenter/uncomment 
+Plugin 'scrooloose/nerdtree'        " File system window
+Plugin 'Valloric/YouCompleteMe'     " Auto completion
+
 " Airline - Pretty Arrow (Very useful)
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-
-Plugin 'L9'
-
-Plugin 'chxuan/change-colorscheme'
-
-" Multiline commenter/uncomment 
-Plugin 'scrooloose/nerdcommenter'
-
-" File system window
-Plugin 'scrooloose/nerdtree'
-
-" Auto completion
-Plugin 'Valloric/YouCompleteMe'
-
-" Auto pairs bracket
-" Plugin 'jiangmiao/auto-pairs'
-
-" HTML stuff 
-" Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-
-" Highlight closing tags
-Plugin 'Valloric/MatchTagAlways'
-
-" insert close tag
-Plugin 'docunext/closetag.vim'
-
-" Indent multi line 
-Plugin 'godlygeek/tabular'
-
-" Git wrapper
-Plugin 'tpope/vim-fugitive'
-
-" Enable to modify surrounding bracket/quote
-Plugin 'tpope/vim-surround'
-
-" Multiline comments what about nerdcommenter
-Plugin 'tpope/vim-commentary'
-
-" Better repeat command
-Plugin 'tpope/vim-repeat'
-
-" Helper to end tags for some languages
-Plugin 'tpope/vim-endwise'
-
-Plugin 'ctrlpvim/ctrlp.vim'
-
-" Class browser 
-Plugin 'majutsushi/tagbar'
-
-" exactly what it says
-Plugin 'octol/vim-cpp-enhanced-highlight'
-
-" switch between header and source files
-Plugin 'vim-scripts/a.vim'
-
-"Plugin 'vim-scripts/DoxygenToolkit.vim'
-"Plugin 'vim-scripts/SQLComplete.vim'
-
-" Txt file highlighting
-Plugin 'vim-scripts/txt.vim'
-
-" Pretty icons
-Plugin 'ryanoasis/vim-devicons'
-
-" Show HEX color in text
-Plugin 'gorodinskiy/vim-coloresque'
-
-" Directory diff 
-" Plugin 'will133/vim-dirdiff'
-
-" Incremental Search
-Plugin 'haya14busa/incsearch.vim'
-
-" Useless starting window
-Plugin 'mhinz/vim-startify'
 
 call vundle#end()            
 filetype plugin indent on    
